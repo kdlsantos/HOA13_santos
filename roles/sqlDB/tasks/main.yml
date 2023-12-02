@@ -1,10 +1,24 @@
 ---
-- name: Install SQL Database
+- name: Inatlling the mariadb server
   apt:
-    name: "{{ item }}"
+    name: mariadb-server
     state: present
-  loop:
-    - mysql-server
-    - python3-pymysql
+
+- name: Install mysql
+  apt:
+    name: python3-pymysql
+    state: present
+
+- name: Start Mariadb
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
   become: true
-  become_method: sudo
+
+- name: Restart Mysql
+  systemd:
+    name: mysql
+    state: restarted
+    enabled: yes
+  become: true
