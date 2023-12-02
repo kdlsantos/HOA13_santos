@@ -1,0 +1,12 @@
+---
+- name: Installing of ETCD
+  apt:
+    name: etcd
+    state: present
+
+- name: Enable and Start ETCD
+  systemd:
+    name: etcd
+    state: started
+    enabled: yes
+  become: true

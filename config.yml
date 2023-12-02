@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Update ubuntu
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles:
+    - ntp
+    - openStack
+    - sqlDB
+    - messQueue
+    - memcached
+    - etcd
